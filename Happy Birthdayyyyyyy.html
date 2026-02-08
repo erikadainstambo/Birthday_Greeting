@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Rizhiaaaaaaaa</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #000000, #2b004f);
+            color: #f5e6b3;
+            overflow-y: auto;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #d4af37;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 90%;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 0 25px #6a0dad;
+            position: relative;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 35px #c77dff;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            max-width: 35vw;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            aspect-ratio: 1 / 1;
+        }
+
+        img:hover {
+            transform: rotate(360deg);
+        }
+
+        h1 {
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-shadow: 0 0 10px #c77dff;
+        }
+
+        #countdown {
+            font-size: 24px;
+            color: #c77dff;
+            margin: 15px 0;
+            text-shadow: 0 0 5px #d4af37;
+        }
+
+        #message {
+            font-size: 15px;
+            line-height: 1.7;
+            white-space: pre-line;
+            display: none;
+            text-align: left;
+            padding: 10px;
+            border-left: 3px solid #c77dff;
+        }
+
+        .heart {
+            position: absolute;
+            color: #c77dff;
+            font-size: 18px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .card { padding: 15px; }
+            h1 { font-size: 20px; }
+            #countdown { font-size: 20px; }
+            #message { font-size: 14px; }
+            img { width: 120px; height: 120px; }
+        }
+    </style>
+</head>
+
+<body onclick="startExperience()">
+
+    <div class="card">
+        <img src="bestie.jpg" alt="Birthday Girl">
+        <h1>Happy Birthday 🎉</h1>
+        <div id="countdown">Click anywhere 💜</div>
+        <div id="message"></div>
+    </div>
+
+    <audio id="bdayMusic" src="happybirthday.mp3"></audio>
+
+    <script>
+        let started = false;
+
+        const text = `Happy happy birthday to my best girl.
+
+Hindi man bongga ang araw na ’to, gusto kong malaman mo kung gaano ako ka-proud sa’yo.
+Ang dami mong pinagdadaanan ngayon, lalo na at mag-OJT ka na, at minsan parang sobrang bigat na.
+Dadagdag pa nga ako sa stress mo, pero gusto ko lang ipaalala na ang lakas-lakas mo,
+kahit hindi mo palaging nararamdaman.
+
+Okay lang mapagod. Okay lang malungkot.
+Pero hindi ka pwedeng sumuko, ha.
+Always think positive, at parati mong tandaan na kahit negative ang result minsan, laban lang.
+Malayo pa ang tatahakin mo at marami ka pang maaabot.
+
+Darating pa yung mga araw na mapapangiti ka
+at masasabi mong worth it pala lahat.
+
+May mga pangako pa tayo—yung BTS concert,
+yung mga future chika,
+at magiging ninang ka pa ng anak ko.
+Kaya fighting lang palagi.
+
+At please, alagaan mo sarili mo at pagaling ka.
+Importante ka sa akin, always.
+
+Happy birthday ulit, bestie.
+Andito lang ako, kahit anong mangyari. 💜`;
+
+        function startExperience() {
+            if (started) return;
+            started = true;
+
+            document.getElementById("bdayMusic").play();
+            startCountdown();
+            createHearts();
+        }
+
+        function startCountdown() {
+            const cd = document.getElementById("countdown");
+            const name = "Rizhiaaaaaaaa";
+            let count = 3;
+
+            cd.textContent = `Happy 22nd Birthday ${name}! ${count}`;
+            
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    cd.textContent = `Happy 22nd Birthday ${name}! ${count}`;
+                } else {
+                    clearInterval(timer);
+                    cd.style.display = "none";
+                    showMessage();
+                }
+            }, 1000);
+        }
+
+        function showMessage() {
+            const msg = document.getElementById("message");
+            msg.style.display = "block";
+
+            let i = 0;
+            const speed = 30;
+
+            function typing() {
+                if (i < text.length) {
+                    msg.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "💜";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 6000);
+            }, 250);
+        }
+    </script>
+
+</body>
+</html>
